@@ -4,36 +4,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
 
     const arrow = document.querySelector('.arrow');
-    const showOffset = 300;
+    const cartIcon = document.querySelector('.cart-icon');
+    const showOffset = 700;
+
+    function toggleElementVisibility(element) {
+        if (!element) return;
     
-    // if (arrow) {
-    //     function toggleArrowVisibility() {
-    //         const scrollPosition = window.scrollY || window.pageYOffset;
-
-    //         if (scrollPosition > showOffset) {
-    //             arrow.classList.add('visible');
-    //             console.log('Arrow should be visible');
-    //         }else {
-    //             arrow.classList.remove('visible');
-    //             console.log('Arrow should be hidden');
-    //         }
-    //     }
-
-    //     toggleArrowVisibility();
-        
-    //     let ticking = false;
-    //     window.addEventListener('scroll', function() {
-    //         if (!ticking) {
-    //             window.requestAnimationFrame(function() {
-    //                 toggleArrowVisibility();
-    //                 ticking = false;
-    //             });
-    //             ticking = true;
-    //         }
-    //     });
-
-    //     console.log('Scroll listener added');
-    // }else {
-    //     console.warn('.arrow element not found');
-    // }
+        const scrollPosition = window.scrollY || window.pageYOffset;
+    
+        if (scrollPosition > showOffset) {
+            element.classList.add('visible');
+            console.log(`${element.className} should be visible`);
+        } else {
+            element.classList.remove('visible');
+            console.log(`${element.className} should be hidden`);
+        }
+    }
+    
+    function toggleVisibility() {
+        toggleElementVisibility(arrow);
+        toggleElementVisibility(cartIcon);
+    }
+    
+    toggleVisibility(); // 初期状態の設定
+    
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                toggleVisibility();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    console.log('Scroll listener added');
 });
